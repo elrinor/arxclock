@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="/" lang="eng" >
+    <file>icon_clock.png</file>
+    <file>icon_play.png</file>
+    <file>icon_stop.png</file>
+    <file>icon_open.png</file>
+    <file>icon_remove.png</file>
+  </qresource>
+</RCC> 
