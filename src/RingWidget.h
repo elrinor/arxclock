@@ -12,8 +12,8 @@
 // -------------------------------------------------------------------------- //
 class RingWidgetKeys {
 public:
-  static QString keySize() { return "ring_dialog/size"; }
-  static QString keyPos () { return "ring_dialog/position"; }
+  static QString keySize() { return "ring_widget/size"; }
+  static QString keyPos () { return "ring_widget/position"; }
 };
 
 

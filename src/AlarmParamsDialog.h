@@ -18,8 +18,6 @@ public:
 };
 
 
-// rundll32.exe user32.dll, LockWorkStation 
-
 // -------------------------------------------------------------------------- //
 // AlarmParamsDialog
 // -------------------------------------------------------------------------- //
@@ -55,6 +53,8 @@ private:
   
   QTextEdit* mMessageEdit;
   QLabel* mAudioFile;
+
+  QComboBox* mCommandLineBox;
 
   QToolButton* mPlayStopButton;
 

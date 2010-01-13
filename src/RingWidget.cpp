@@ -1,4 +1,5 @@
 #include "RingWidget.h"
+#include <cstdlib> /* for system(). */
 #include "Alarm.h"
 #include "Sound.h"
 #include "SnoozeDialog.h"
@@ -34,6 +35,9 @@ RingWidget::RingWidget(QSettings* settings, boost::shared_ptr<Alarm> alarm, Main
 
   Sound* sound = new Sound(alarm->fileName(), this);
   sound->play();
+
+  if(!alarm->commandLine().isEmpty())
+    system(alarm->commandLine().toAscii().constData());
 
   setWindowTitle(alarm->name());
 
