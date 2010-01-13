@@ -82,11 +82,20 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   audioLayout->addWidget(mPlayStopButton);
   audioLayout->addWidget(mRemoveButton);
 
+  mCommandLineBox = new QComboBox();
+  mCommandLineBox->setEditable(true);
+#ifdef Q_WS_WIN
+  mCommandLineBox->addItem("rundll32.exe user32.dll, LockWorkStation");
+#endif
+  mCommandLineBox->setEditText(alarm->commandLine());
+
   QGridLayout* gridLayout = new QGridLayout();
-  gridLayout->addWidget(messageLabel,             0, 0);
-  gridLayout->addWidget(mMessageEdit,             0, 1);
-  gridLayout->addWidget(new QLabel("Play Sound"), 1, 0);
-  gridLayout->addLayout(audioLayout,              1, 1);
+  gridLayout->addWidget(messageLabel,              0, 0);
+  gridLayout->addWidget(mMessageEdit,              0, 1);
+  gridLayout->addWidget(new QLabel("Play Sound"),  1, 0);
+  gridLayout->addLayout(audioLayout,               1, 1);
+  gridLayout->addWidget(new QLabel("Run Command"), 2, 0);
+  gridLayout->addWidget(mCommandLineBox,           2, 1);
 
   QVBoxLayout* settingsLayout = new QVBoxLayout();
   settingsLayout->addLayout(dateTimeLayout);
@@ -207,6 +216,7 @@ void AlarmParamsDialog::doAccept() {
   mAlarm->setMessage(mMessageEdit->toPlainText());
   mAlarm->setFileName(mAudioFile->text());
   mAlarm->setName(mNameEdit->text());
+  mAlarm->setCommandLine(mCommandLineBox->currentText());
 
   for(int i = 0; i < 7; i++)
     mAlarm->setWeekMask(i, mWeeklyButtons[i]->isChecked());
