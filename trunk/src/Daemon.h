@@ -3,28 +3,28 @@
 
 #include "config.h"
 #include <QtGui>
-#include "MainDialog.h"
-#include "RingDialog.h"
+#include "MainWidget.h"
+#include "RingWidget.h"
 
 class Daemon: public QObject {
 private:
   Q_OBJECT
 
 public:
-  Daemon();
+  Daemon(QSettings* settings);
+  ~Daemon();
 
 private slots:
   void iconActivated(QSystemTrayIcon::ActivationReason reason);
   void timeout();
-  void displayMainDialog();
 
 private:
-  QTimer* timer;
-  QSettings* settings;
-  QSystemTrayIcon* trayIcon;
-  MainDialog* settingsDialog;
+  QTimer* mTimer;
+  QSettings* mSettings;
+  QSystemTrayIcon* mTrayIcon;
+  MainWidget* mMainWidget;
 
-  QSet<QString> ringDlgs;
+  AlarmManager mAlarmManager;
 };
 
 

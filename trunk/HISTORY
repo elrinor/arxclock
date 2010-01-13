@@ -1,2 +1,6 @@
+1.1.0
++ Multiple alarms can now run simultaneously (this prevents the situation when 
+  a noiseless alarm blocks the noisy one).
+
 1.0.0
 * Initial release

@@ -2,7 +2,9 @@
 #define __ARXCLOCK_ALARM_H__
 
 #include "config.h"
+#include <cassert>
 #include <boost/noncopyable.hpp>
+#include <boost/array.hpp>
 #include <QtCore>
 #include <QStandardItem>
 #include "Utility.h"
@@ -25,13 +27,9 @@ public:
     ALARM_LAST_TYPE = ALARM_ANNUALLY
   };
 
-  Alarm::Alarm(const QString& id, Type type, bool enabled, const QString& name, const QString& message, const QDateTime& time, const QList<QVariant>& weekMask, const QString& fileName, const QString& commandLine):
-    mId(id), mType(type), mEnabled(enabled), mName(name), mMessage(message), mTime(time), mFileName(fileName), mCommandLine(commandLine) {
-    foreach(const QVariant& value, weekMask)
-      mWeekMask.append(value.toBool());
-
-    mChanged = false;
-    //this->mId = now.toString("hh_mm_ss_zzz") + "_" + QString().setNum(qrand());
+  Alarm::Alarm(const QString& id, Type type, bool enabled, const QString& name, const QString& message, const QDateTime& time, const boost::array<bool, 7>& weekMask, const QString& fileName, const QString& commandLine):
+    mId(id), mType(type), mEnabled(enabled), mName(name), mMessage(message), mTime(time), mFileName(fileName), mCommandLine(commandLine), mWeekMask(weekMask), mChanged(false), mActive(false) {
+    recalculateNextRunTime();
   }
 
   const QString& id() const {
@@ -58,8 +56,12 @@ public:
     return mTime;
   }
 
-  const QList<bool>& weekMask() const {
+  const boost::array<bool, 7>& weekMask() const {
     return mWeekMask;
+  }
+
+  bool weekMask(int index) const {
+    return mWeekMask[index];
   }
 
   const QString& fileName() const {
@@ -70,8 +72,54 @@ public:
     return mCommandLine;
   }
 
+  void setType(Type type) {
+    assert(type > ALARM_COUNTDOWN && type <= ALARM_LAST_TYPE);
+
+    mChanged = true;
+    mType = type;
+  }
+
+  void setEnabled(bool enabled)  {
+    mChanged = true;
+    mEnabled = enabled;
+  }
+
+  void setName(const QString& name) {
+    mChanged = true;
+    mName = name;
+  }
+
+  void setMessage(const QString& message) {
+    mChanged = true;
+    mMessage = message;
+  }
+
+  void setTime(const QDateTime& time) {
+    mChanged = true;
+    mTime = time;
+  }
+
+  void setWeekMask(int index, bool value) {
+    mChanged = true;
+    mWeekMask[index] = value;
+  }
+
+  void setFileName(const QString& fileName) {
+    mChanged = true;
+    mFileName = fileName;
+  }
+
+  void setCommandLine(const QString& commandLine) {
+    mChanged = true;
+    mCommandLine = commandLine;
+  }
+
   QDateTime nextRunTime() const {
     return mNextRunTime;
+  }
+
+  bool active() const {
+    return mActive;
   }
 
   static QString typeToString(Type type) {
@@ -122,6 +170,14 @@ public:
     }
   }
 
+  void setActive(bool active) {
+    mActive = active;
+  }
+
+  void setNextRunTime(const QDateTime& time) {
+    mNextRunTime = time;
+  }
+
   void recalculateNextRunTime() {
     QDateTime now = QDateTime::currentDateTime();
     
@@ -147,7 +203,7 @@ public:
       break;
     case ALARM_WEEKLY: {
       bool isNever = true;
-      for(int i = 0; i < mWeekMask.size(); i++) {
+      for(unsigned i = 0; i < mWeekMask.size(); i++) {
         if(mWeekMask[i]) {
           isNever = false;
           break;
@@ -182,9 +238,6 @@ public:
     }
   }
 
-  //QList<QStandardItem*> toRow() const;
-
-  QString toString() const;
 
 protected:
   bool changed() const {
@@ -194,6 +247,8 @@ protected:
   void setChanged(bool changed) {
     mChanged = changed;
   }
+
+  friend class AlarmManager;
 
 private:
   static QDateTime never() {
@@ -207,12 +262,13 @@ private:
   QString mName;
   QString mMessage;
   QDateTime mTime;
-  QList<bool> mWeekMask;
+  boost::array<bool, 7> mWeekMask;
   QString mFileName;
   QString mCommandLine;
 
   /* In-app state. */
   bool mChanged;
+  bool mActive;
   QDateTime mNextRunTime;
 };
 
