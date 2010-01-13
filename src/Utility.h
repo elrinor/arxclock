@@ -1,8 +1,11 @@
 #ifndef __ARXCLOCK_UTILITY_H__
 #define __ARXCLOCK_UTILITY_H__
 
+#include "config.h"
 #include <cassert>
 #include <QString>
+
+#define Unreachable() {assert(!"Unreachable code executed."); throw 0;} 
 
 namespace detail {
   static const QString dayNames[] = {

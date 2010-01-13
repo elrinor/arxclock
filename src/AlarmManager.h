@@ -4,17 +4,15 @@
 #include "config.h"
 #include <cassert>
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 #include <QHash>
 #include "Alarm.h"
 
 // -------------------------------------------------------------------------- //
 // AlarmManagerKeys
 // -------------------------------------------------------------------------- //
-template<class T>
 class AlarmManagerKeys {
 public:
-  typedef T tag;
-
   static QString keyAlarmIds        ()                  { return "alarm_ids"; }
   static QString keyAlarmEnabled    (const QString& id) { return "alarm_" + id + "/enabled"; }
   static QString keyAlarmName       (const QString& id) { return "alarm_" + id + "/name"; }
@@ -32,40 +30,39 @@ public:
 // -------------------------------------------------------------------------- //
 class AlarmManager: public boost::noncopyable, private AlarmManagerKeys {
 public:
-  AlarmManager(QSettings* settings): mSettings(QSettings) {
+  AlarmManager(QSettings* settings): mSettings(settings) {
     rollback();
   }
 
-  const QList<Alarm*>& alarms() const {
-    return mAlarms.values();
+  const QList<boost::shared_ptr<Alarm> > alarms() const {
+    return mAlarms;
   }
 
-  Alarm* alarmById(QString id) const {
-    return mAlarms[id];
+  boost::shared_ptr<Alarm> alarmById(QString id) const {
+    return mAlarmsMap[id];
   }
 
-  /** This one also deletes given alarm. */
-  void remove(Alarm* alarm) const {
-    assert(mAlarms.contains(alarm->id()));
+  void remove(boost::shared_ptr<Alarm> alarm) {
+    assert(mAlarmsMap.contains(alarm->id()));
 
-    mAlarms.remove(alarm->id());
-    delete alarm;
+    mAlarms.removeAll(alarm);
+    mAlarmsMap.remove(alarm->id());
 
     mStructurallyModified = true;
   }
 
-  /** This one claims given alarm. */
-  void add(Alarm* alarm) const {
-    assert(!mAlarms.contains(alarm->id()));
+  void add(boost::shared_ptr<Alarm> alarm) {
+    assert(!mAlarmsMap.contains(alarm->id()));
 
     alarm->setChanged(true);
-    mAlarms.insert(alarm->id(), alarm);
+    mAlarms.append(alarm);
+    mAlarmsMap.insert(alarm->id(), alarm);
 
     mStructurallyModified = true;
   }
 
   void commit() {
-    foreach(Alarm* alarm, mAlarms) {
+    foreach(boost::shared_ptr<Alarm> alarm, mAlarms) {
       if(alarm->changed()) {
         QString id = alarm->id();
 
@@ -87,12 +84,9 @@ public:
       }
     }
 
-    foreach(Alarm* alarm, mDeletedAlarms)
-      delete alarm;
-
     if(mStructurallyModified) {
       QList<QVariant> alarmIds;
-      foreach(Alarm* alarm, mAlarms)
+      foreach(boost::shared_ptr<Alarm> alarm, mAlarms)
         alarmIds.append(alarm->id());
       mSettings->setValue(keyAlarmIds(), alarmIds);
 
@@ -107,19 +101,27 @@ public:
     foreach(const QVariant& variantId, alarmIds) {
       QString id = variantId.toString();
 
-      Alarm* alarm = new Alarm(
+      boost::array<bool, 7> weekMask;
+      std::fill(weekMask.begin(), weekMask.end(), false);
+      
+      QList<QVariant> variantWeekMask = mSettings->value(keyAlarmWeekMask(id), QList<QVariant>()).toList();
+      for(int i = 0; i < std::min(variantWeekMask.size(), static_cast<int>(weekMask.size())); i++)
+        weekMask[i] = variantWeekMask[i].toBool();
+
+      boost::shared_ptr<Alarm> alarm(new Alarm(
         id,
         static_cast<Alarm::Type>(mSettings->value(keyAlarmType(id), 0).toInt()),
         mSettings->value(keyAlarmEnabled(id), true).toBool(),
         mSettings->value(keyAlarmName(id), "Alarm " + id).toString(),
         mSettings->value(keyAlarmMessage(id), QString("Time to watch anime!")).toString(),
         mSettings->value(keyAlarmTime(id), QDateTime::currentDateTime()).toDateTime(),
-        mSettings->value(keyAlarmWeekMask(id), QList<QVariant>()).toList(),
+        weekMask,
         mSettings->value(keyAlarmFileName(id), QString()).toString(),
         mSettings->value(keyAlarmCommandLine(id), QString()).toString()
-      );
+      ));
 
-      mAlarms.insert(id, alarm);
+      mAlarms.append(alarm);
+      mAlarmsMap.insert(id, alarm);
     }
 
     mStructurallyModified = false;
@@ -127,14 +129,13 @@ public:
 
   void clear() {
     mStructurallyModified = !mAlarms.empty();
-
-    foreach(Alarm* alarm, mAlarms)
-      delete alarm;
     mAlarms.clear();
+    mAlarmsMap.clear();
   }
 
 private:
-  QHash<QString, Alarm*> mAlarms;
+  QHash<QString, boost::shared_ptr<Alarm> > mAlarmsMap;
+  QList<boost::shared_ptr<Alarm> > mAlarms;
   bool mStructurallyModified;
   QSettings* mSettings;
 };

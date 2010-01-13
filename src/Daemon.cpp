@@ -1,20 +1,24 @@
 #include "Daemon.h"
-#include "MainDialog.h"
+#include "MainWidget.h"
 #include "Alarm.h"
 
-Daemon::Daemon(): settingsDialog(NULL) {
-  this->settings = new QSettings("[ArX]Team", "arxclock", this);
+Daemon::Daemon(QSettings* settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
+  mTrayIcon = new QSystemTrayIcon(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon(), this);
+  mTrayIcon->setToolTip("arxclock");
+  mTrayIcon->show();
 
-  this->trayIcon = new QSystemTrayIcon(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon(), this);
-  this->trayIcon->setToolTip("arxclock");
-  this->trayIcon->show();
+  mTimer = new QTimer(this);
+  connect(mTimer, SIGNAL(timeout()), this, SLOT(timeout()));
+  mTimer->start(1000);
 
-  this->timer = new QTimer(this);
-  connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
-  timer->start(1000);
+  mMainWidget = new MainWidget(mSettings, &mAlarmManager);
 
-  connect(this->trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+  connect(mTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
     this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+}
+
+Daemon::~Daemon() {
+  delete mMainWidget;
 }
 
 void Daemon::iconActivated(QSystemTrayIcon::ActivationReason reason) {
@@ -22,7 +26,7 @@ void Daemon::iconActivated(QSystemTrayIcon::ActivationReason reason) {
   case QSystemTrayIcon::Context:
     break;
   case QSystemTrayIcon::DoubleClick:
-    displayMainDialog();
+    mMainWidget->show();
     break;
   case QSystemTrayIcon::Trigger:
   case QSystemTrayIcon::MiddleClick:
@@ -33,50 +37,26 @@ void Daemon::iconActivated(QSystemTrayIcon::ActivationReason reason) {
 }
 
 void Daemon::timeout() {
+  bool activated = false;
+
   QDateTime now = QDateTime::currentDateTime();
-  QList<QVariant> alarmIds = this->settings->value(KEY_ALARM_IDS, QList<QVariant>()).toList();
-  for(int i = 0; i < alarmIds.size(); i++) {
-    if(this->ringDlgs.contains(alarmIds[i].toString()))
+  foreach(boost::shared_ptr<Alarm> alarm, mAlarmManager.alarms()) {
+    if(alarm->active())
+      continue;
+    
+    if(now.secsTo(alarm->nextRunTime()) >= 0)
       continue;
 
-    QDateTime time = QDateTime::fromString(this->settings->value(KEY_NEXTRUN(alarmIds[i])).toString());
-
-    QString s1 = time.toString();
-    QString s2 = now.toString();
-
-    if(now.secsTo(time) >= 0)
-      continue;
-
-    bool snoozed = false;
-    int snoozeTimeSecs = 0;
-    if(this->settings->value(KEY_ENABLED(alarmIds[i])).toBool()) {
-      RingDialog* ringDlg = new RingDialog(this->settings, alarmIds[i]);
-      ringDlg->exec();
-      snoozed = ringDlg->result() == QDialog::Accepted;
-      snoozeTimeSecs = ringDlg->getSnoozeSecs();
-      delete ringDlg;
+    if(alarm->enabled()) {
+      activated = true;
+      alarm->setActive(true);
+      RingWidget* ringWidget = new RingWidget(mSettings, alarm, mMainWidget);
+      ringWidget->setAttribute(Qt::WA_DeleteOnClose);
+      ringWidget->show();
     }
-    if(snoozed) {
-      Alarm alarm = Alarm::loadFromSettings(this->settings, alarmIds[i]);
-      alarm.mNextRunTime = QDateTime::currentDateTime().addSecs(snoozeTimeSecs);
-      this->settings->setValue(KEY_NEXTRUN(alarmIds[i]), alarm.mNextRunTime.toString());
-    } else {
-      Alarm alarm = Alarm::loadFromSettings(this->settings, alarmIds[i]);
-      alarm.recalculateNextRunTime();
-      this->settings->setValue(KEY_NEXTRUN(alarmIds[i]), alarm.mNextRunTime.toString());
-    }
-    this->ringDlgs.remove(alarmIds[i].toString());
-    break;
   }
-}
 
-void Daemon::displayMainDialog() {
-  if(this->settingsDialog == NULL) {
-    this->settingsDialog = new MainDialog(this->settings);
-    this->settingsDialog->exec();
-    delete this->settingsDialog;
-    this->settingsDialog = NULL;
-  } else
-    this->settingsDialog->activateWindow();
+  if(activated)
+    mMainWidget->updateNextRunTimes();
 }
 
