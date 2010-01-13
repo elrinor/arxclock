@@ -165,6 +165,13 @@ bool MainWidget::eventFilter(QObject* /* sender */, QEvent* e) {
       editClicked();
       filtered = true;
       break;
+    case Qt::Key_Space: {
+      QModelIndex idx = mTreeView->currentIndex();
+      if(idx.row() == -1)
+        break;
+      toggleEnabledSelected();
+      break;
+    }
     default:
       break;
     }
@@ -176,15 +183,19 @@ void MainWidget::clicked(const QModelIndex& idx) {
   if(idx.column() == -1 || idx.row() == -1)
     return;
 
-  if(idx.column() == 0) {
-    boost::shared_ptr<Alarm> alarm = mAlarmManager->alarmById(idx.data(Qt::UserRole).toString());
-    alarm->setEnabled(!alarm->enabled());
-    
-    int r = idx.row();
-    int c = idx.column();
-    mItemModel->removeRow(r);
-    mItemModel->insertRow(r, alarmToRow(alarm));
-    mTreeView->setCurrentIndex(mItemModel->index(r, c));
-  }
+  if(idx.column() == 0)
+    toggleEnabledSelected();
+}
+
+void MainWidget::toggleEnabledSelected() {
+  QModelIndex idx = mTreeView->currentIndex();
+  boost::shared_ptr<Alarm> alarm = mAlarmManager->alarmById(idx.data(Qt::UserRole).toString());
+  alarm->setEnabled(!alarm->enabled());
+
+  int r = idx.row();
+  int c = idx.column();
+  mItemModel->removeRow(r);
+  mItemModel->insertRow(r, alarmToRow(alarm));
+  mTreeView->setCurrentIndex(mItemModel->index(r, c));
 }
 

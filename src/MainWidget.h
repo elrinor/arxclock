@@ -39,6 +39,7 @@ private slots:
 private:
   static QList<QStandardItem*> alarmToRow(boost::shared_ptr<Alarm> alarm);
   static QString alarmNextRun(boost::shared_ptr<Alarm> alarm);
+  void toggleEnabledSelected();
 
   QSettings* mSettings;
   QTreeView* mTreeView;
