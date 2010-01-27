@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_MAIN_DIALOG_H__
-#define __ARXCLOCK_MAIN_DIALOG_H__
+#ifndef __ARXCLOCK_MAIN_WIDGET_H__
+#define __ARXCLOCK_MAIN_WIDGET_H__
 
 #include "config.h"
 #include <QtGui>
@@ -47,4 +47,4 @@ private:
   AlarmManager* mAlarmManager;
 };
 
-#endif // __ARXCLOCK_MAIN_DIALOG_H__
+#endif // __ARXCLOCK_MAIN_WIDGET_H__

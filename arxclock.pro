@@ -33,15 +33,17 @@ MOC_DIR   = src/moc
 RCC_DIR   = src/rcc
 TARGET    = arxclock
 
-win32:RC_FILE             = src/res/arxclock.rc
+win32:RC_FILE    = src/res/arxclock.rc
 
-win32:debug:DESTDIR       = bin/debug
-win32:debug:OBJECTS_DIR   = bin/debug
-win32:release:DESTDIR     = bin/release
-win32:release:OBJECTS_DIR = bin/release
+win32:debug {
+  DESTDIR         = bin/debug
+  OBJECTS_DIR     = bin/debug
+  CONFIG         += console
+}
 
-win32:debug:CONFIG       += console
-
-win32:release:CONFIG     -= console
-
-win32:release:QMAKE_POST_LINK = upx -9 -q $$DESTDIR/$$join(TARGET, "", "", ".exe")
+win32:release {
+  DESTDIR         = bin/release
+  OBJECTS_DIR     = bin/release
+  CONFIG         -= console
+  QMAKE_POST_LINK = upx -9 -q $$DESTDIR/$$join(TARGET, "", "", ".exe")
+}

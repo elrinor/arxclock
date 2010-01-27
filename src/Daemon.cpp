@@ -1,8 +1,11 @@
 #include "Daemon.h"
+#include <cassert>
 #include "MainWidget.h"
 #include "Alarm.h"
 
 Daemon::Daemon(QSettings* settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
+  assert(settings != NULL);
+
   mTrayIcon = new QSystemTrayIcon(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon(), this);
   mTrayIcon->setToolTip("arxclock");
   mTrayIcon->show();
@@ -27,6 +30,9 @@ void Daemon::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     break;
   case QSystemTrayIcon::DoubleClick:
     mMainWidget->show();
+    mMainWidget->raise();
+    mMainWidget->showNormal();
+    mMainWidget->activateWindow();
     break;
   case QSystemTrayIcon::Trigger:
   case QSystemTrayIcon::MiddleClick:
