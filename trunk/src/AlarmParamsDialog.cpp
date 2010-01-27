@@ -31,7 +31,7 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   typeLayout->addWidget(mNameEdit);
   typeLayout->addStretch(1);
 
-  QGroupBox* generalBox = new QGroupBox(QString("&General"));
+  QGroupBox* generalBox = new QGroupBox("&General");
   generalBox->setLayout(typeLayout);
 
   mPreLabel = new QLabel();
@@ -103,7 +103,7 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   settingsLayout->addStretch(1);
   settingsLayout->addLayout(gridLayout);
 
-  QGroupBox* settingsBox = new QGroupBox(QString("&Settings"));
+  QGroupBox* settingsBox = new QGroupBox("&Settings");
   settingsBox->setLayout(settingsLayout);
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok, Qt::Horizontal);

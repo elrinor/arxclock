@@ -101,7 +101,7 @@ void MainWidget::addClicked() {
   std::fill(weekMask.begin(), weekMask.end(), false);
 
   boost::shared_ptr<Alarm> alarm(new Alarm(
-    QDateTime::currentDateTime().toString("hh_mm_ss_zzz") + "_" + QString().setNum(qrand()),
+    QDateTime::currentDateTime().toString("yy_MM_dd_hh_mm_ss_zzz") + "_" + QString().setNum(qrand()),
     Alarm::ALARM_DAYLY,
     true,
     "",

@@ -5,7 +5,6 @@
 #include "Sound.h"
 
 /* TODO:
-silent alarm blocks loud alarm
 bass better build-in*/
 
 int main(int argc, char *argv[]) {
