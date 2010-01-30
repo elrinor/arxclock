@@ -29,8 +29,8 @@ RESOURCES = \
 win32:LIBS += lib/bass.lib
 
 UI_DIR    = src/ui
-MOC_DIR   = src/moc
-RCC_DIR   = src/rcc
+MOC_DIR   = bin/temp/moc
+RCC_DIR   = bin/temp/rcc
 TARGET    = arxclock
 
 win32:RC_FILE    = src/res/arxclock.rc
