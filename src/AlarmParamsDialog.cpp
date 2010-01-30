@@ -114,7 +114,7 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok, Qt::Horizontal);
   connect(buttonBox, SIGNAL(accepted()), this, SLOT(doAccept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(doReject()));
 
   QVBoxLayout *layout = new QVBoxLayout();
   layout->addWidget(generalBox);
@@ -143,9 +143,13 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
 }
 
 void AlarmParamsDialog::closeEvent(QCloseEvent *event) {
+  savePosition();
+  event->accept();
+}
+
+void AlarmParamsDialog::savePosition() {
   mSettings->setValue(keySize(), size());
   mSettings->setValue(keyPos(), pos());
-  event->accept();
 }
 
 void AlarmParamsDialog::typeIndexChanged(int index) {
@@ -229,7 +233,13 @@ void AlarmParamsDialog::doAccept() {
 
   mAlarm->recalculateNextRunTime();
 
+  savePosition();
   accept();
+}
+
+void AlarmParamsDialog::doReject() {
+  savePosition();
+  reject();
 }
 
 void AlarmParamsDialog::openAudioFile() {

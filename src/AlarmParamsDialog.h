@@ -33,12 +33,15 @@ protected:
 private slots:
   void typeIndexChanged(int index);
   void doAccept();
+  void doReject();
   void openAudioFile();
   void removeAudioFile();
   void playStopClick();
 
 private:
   QAbstractButton* createWeeklyButton(const QString& text);
+
+  void savePosition();
 
   QSettings* mSettings;
 
