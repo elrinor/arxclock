@@ -63,6 +63,9 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   QLabel* messageLabel = new QLabel("Show Message");
   messageLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
 
+  QLabel* playSoundLabel = new QLabel("Play Sound");
+  playSoundLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
   mAudioFile = new QLabel(alarm->fileName());
   QToolButton* openButton = new QToolButton();
   openButton->setIcon(QIcon(":/icon_open.png"));
@@ -82,6 +85,9 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   audioLayout->addWidget(mPlayStopButton);
   audioLayout->addWidget(mRemoveButton);
 
+  QLabel* runLabel = new QLabel("Run Command");
+  runLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
   mCommandLineBox = new QComboBox();
   mCommandLineBox->setEditable(true);
 #ifdef Q_WS_WIN
@@ -90,12 +96,12 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   mCommandLineBox->setEditText(alarm->commandLine());
 
   QGridLayout* gridLayout = new QGridLayout();
-  gridLayout->addWidget(messageLabel,              0, 0);
-  gridLayout->addWidget(mMessageEdit,              0, 1);
-  gridLayout->addWidget(new QLabel("Play Sound"),  1, 0);
-  gridLayout->addLayout(audioLayout,               1, 1);
-  gridLayout->addWidget(new QLabel("Run Command"), 2, 0);
-  gridLayout->addWidget(mCommandLineBox,           2, 1);
+  gridLayout->addWidget(messageLabel,    0, 0);
+  gridLayout->addWidget(mMessageEdit,    0, 1);
+  gridLayout->addWidget(playSoundLabel,  1, 0);
+  gridLayout->addLayout(audioLayout,     1, 1);
+  gridLayout->addWidget(runLabel,        2, 0);
+  gridLayout->addWidget(mCommandLineBox, 2, 1);
 
   QVBoxLayout* settingsLayout = new QVBoxLayout();
   settingsLayout->addLayout(dateTimeLayout);
