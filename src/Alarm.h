@@ -27,7 +27,7 @@ public:
     ALARM_LAST_TYPE = ALARM_ANNUALLY
   };
 
-  Alarm::Alarm(const QString& id, Type type, bool enabled, const QString& name, const QString& message, const QDateTime& time, const boost::array<bool, 7>& weekMask, const QString& fileName, const QString& commandLine):
+  Alarm(const QString& id, Type type, bool enabled, const QString& name, const QString& message, const QDateTime& time, const boost::array<bool, 7>& weekMask, const QString& fileName, const QString& commandLine):
     mId(id), mType(type), mEnabled(enabled), mName(name), mMessage(message), mTime(time), mFileName(fileName), mCommandLine(commandLine), mWeekMask(weekMask), mChanged(false), mActive(false) {
     recalculateNextRunTime();
   }

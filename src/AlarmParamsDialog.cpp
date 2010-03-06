@@ -214,11 +214,8 @@ void AlarmParamsDialog::doAccept() {
   Alarm::Type type = static_cast<Alarm::Type>(mTypeBox->itemData(mTypeBox->currentIndex()).toInt());
   QDateTime time = mDateTimeEdit->dateTime();
   if(type == Alarm::ALARM_COUNTDOWN) {
-    mAlarm->setType(Alarm::ALARM_ONCE);
-    
-    QDateTime now = QDateTime::currentDateTime();
-    now = now.addSecs(time.time().second() + 60 * time.time().minute() + 60 * 60 * time.time().hour());
-    time = now;
+    type = Alarm::ALARM_ONCE;
+    time = QDateTime::currentDateTime().addSecs(time.time().second() + 60 * time.time().minute() + 60 * 60 * time.time().hour());
   }
 
   mAlarm->setType(type);

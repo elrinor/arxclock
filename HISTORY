@@ -1,3 +1,6 @@
+1.1.6
+* Fixed a bug with crash on creation of countdown alarm.
+
 1.1.5
 * Alarm parameters dialog position is now saved correctly.
 
