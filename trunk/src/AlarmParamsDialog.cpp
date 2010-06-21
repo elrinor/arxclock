@@ -58,7 +58,8 @@ AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alar
   mWeeklyWidget = new QWidget();
   mWeeklyWidget->setLayout(weeklyLayout);
 
-  mMessageEdit = new QTextEdit(alarm->message());
+  mMessageEdit = new QTextEdit();
+  mMessageEdit->setPlainText(alarm->message());
   mMessageEdit->setMaximumHeight(70);
   QLabel* messageLabel = new QLabel("Show Message");
   messageLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);

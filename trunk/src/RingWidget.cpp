@@ -7,7 +7,7 @@
 RingWidget::RingWidget(QSettings* settings, boost::shared_ptr<Alarm> alarm, MainWidget* mainWidget): mSettings(settings), mAlarm(alarm), mMainWidget(mainWidget), mSnoozeSecs(0) {
   QTextEdit* textMessage = new QTextEdit();
   textMessage->setReadOnly(true);
-  textMessage->setText(alarm->message());
+  textMessage->setPlainText(alarm->message());
 
   QPushButton *snooze5Button = new QPushButton("&Snooze 5 mins...");
   connect(snooze5Button, SIGNAL(clicked()), this, SLOT(snooze5()));
