@@ -33,7 +33,7 @@ TARGET    = arxclock
 
 win32:RC_FILE    = src/res/arxclock.rc
 
-CONFIG(debug, debug|relase) {
+CONFIG(debug, debug|release) {
   CONFIG           += console
   win32 {
     DESTDIR         = bin/debug
