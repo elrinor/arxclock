@@ -22,7 +22,7 @@ HEADERS = \
 FORMS = 
 
 RESOURCES = \
-  src/res/arxclock.qrc \
+  res/arxclock.qrc \
 
 win32:LIBS += lib/bass.lib
 
@@ -31,7 +31,7 @@ MOC_DIR   = bin/temp/moc
 RCC_DIR   = bin/temp/rcc
 TARGET    = arxclock
 
-win32:RC_FILE    = src/res/arxclock.rc
+win32:RC_FILE    = res/arxclock.rc
 
 CONFIG(debug, debug|release) {
   CONFIG           += console
@@ -49,3 +49,4 @@ CONFIG(release, debug|release) {
     QMAKE_POST_LINK = upx -9 -q $$DESTDIR/$$join(TARGET, "", "", ".exe")
   }
 }
+

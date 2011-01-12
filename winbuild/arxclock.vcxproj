@@ -93,12 +93,9 @@ nmake release-clean</NMakeCleanCommandLine>
     <ClCompile Include="..\src\RingWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\res\arxclock.qrc" />
     <None Include="..\arxclock.pro" />
     <None Include="..\HISTORY" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\src\res\arxclock.rc" />
+    <None Include="..\res\arxclock.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
