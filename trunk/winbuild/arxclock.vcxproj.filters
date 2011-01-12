@@ -1,86 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="arxclock">
+    <Filter Include="src">
       <UniqueIdentifier>{52fd4c90-8114-4514-a1a2-70b45de4c176}</UniqueIdentifier>
     </Filter>
-    <Filter Include="arxclock\entities">
+    <Filter Include="src\entities">
       <UniqueIdentifier>{32caaa50-e063-4ca8-b27b-4807867b69be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="arxclock\dialogs">
+    <Filter Include="src\dialogs">
       <UniqueIdentifier>{e4e71253-d3a7-4c57-ad00-9c24b82d142b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
+    <Filter Include="res">
       <UniqueIdentifier>{34afaa60-ada2-4e18-a805-74c48c6fc7c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="project">
-      <UniqueIdentifier>{22fc5405-498b-408f-86ea-b170459f7374}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Daemon.h">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Sound.h">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Utility.h">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Alarm.h">
-      <Filter>arxclock\entities</Filter>
+      <Filter>src\entities</Filter>
     </ClInclude>
     <ClInclude Include="..\src\AlarmManager.h">
-      <Filter>arxclock\entities</Filter>
+      <Filter>src\entities</Filter>
     </ClInclude>
     <ClInclude Include="..\src\AlarmParamsDialog.h">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MainWidget.h">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\src\RingWidget.h">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\src\SnoozeDialog.h">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Daemon.cpp">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\main.cpp">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Sound.cpp">
-      <Filter>arxclock</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AlarmParamsDialog.cpp">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MainWidget.cpp">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\src\RingWidget.cpp">
-      <Filter>arxclock\dialogs</Filter>
+      <Filter>src\dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\res\arxclock.qrc">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\arxclock.pro">
-      <Filter>project</Filter>
-    </None>
     <None Include="..\HISTORY" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\src\res\arxclock.rc">
-      <Filter>resources</Filter>
-    </ResourceCompile>
+    <None Include="..\res\arxclock.qrc">
+      <Filter>res</Filter>
+    </None>
+    <None Include="..\arxclock.pro" />
   </ItemGroup>
 </Project>
