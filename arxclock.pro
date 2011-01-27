@@ -1,5 +1,6 @@
 TEMPLATE  = app
 CONFIG   += qt warn_on
+QT       += phonon
 
 SOURCES = \
   src/AlarmParamsDialog.cpp \
@@ -23,8 +24,6 @@ FORMS =
 
 RESOURCES = \
   res/arxclock.qrc \
-
-win32:LIBS += lib/bass.lib
 
 UI_DIR    = src/ui
 MOC_DIR   = bin/temp/moc
@@ -50,3 +49,7 @@ CONFIG(release, debug|release) {
   }
 }
 
+contains(CONFIG, static) {
+  QTPLUGIN += phonon_ds9
+  DEFINES  += ARXCLOCK_STATIC_PLUGINS
+}

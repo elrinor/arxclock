@@ -247,7 +247,7 @@ void AlarmParamsDialog::openAudioFile() {
     mPlayStopButton->setIcon(QIcon(":/icon_play.png"));
   }
   QString fileName = QFileDialog::getOpenFileName(this, "Open Audio File...", 
-    mSettings->value(keyLastDir()).toString(), "Audio Files (*.wav *.mp3);;All Files (*.*)"); 
+    mSettings->value(keyLastDir()).toString(), "Audio Files (*.wav *.mp3 *.flac *.ape *.wv *.ogg);;All Files (*.*)"); 
   if(!fileName.isEmpty()) {
     mAudioFile->setText(fileName);
     mSettings->setValue(keyLastDir(), fileName);

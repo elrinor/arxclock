@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_RING_DIALOG_H__
-#define __ARXCLOCK_RING_DIALOG_H__
+#ifndef ARXCLOCK_RING_WIDGET_H
+#define ARXCLOCK_RING_WIDGET_H
 
 #include "config.h"
 #include <boost/shared_ptr.hpp>
@@ -48,4 +48,4 @@ private:
   MainWidget* mMainWidget;
 };
 
-#endif // __ARXCLOCK_RING_DIALOG_H__
+#endif // ARXCLOCK_RING_WIDGET_H

@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_ALARM_PARAMS_DIALOG_H__
-#define __ARXCLOCK_ALARM_PARAMS_DIALOG_H__
+#ifndef ARXCLOCK_ALARM_PARAMS_DIALOG_H
+#define ARXCLOCK_ALARM_PARAMS_DIALOG_H
 
 #include "config.h"
 #include <boost/shared_ptr.hpp>
@@ -68,4 +68,4 @@ private:
 };
 
 
-#endif // __ARXCLOCK_ALARM_PARAMS_DIALOG_H__
+#endif // ARXCLOCK_ALARM_PARAMS_DIALOG_H

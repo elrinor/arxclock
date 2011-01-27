@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_UTILITY_H__
-#define __ARXCLOCK_UTILITY_H__
+#ifndef ARXCLOCK_UTILITY_H
+#define ARXCLOCK_UTILITY_H
 
 #include "config.h"
 #include <cassert>
@@ -17,7 +17,8 @@ namespace detail {
     QString("Sat"), 
     QString("Sun")
   };
-}
+
+} // namespace detail
 
 static QString dayName(int dayOfTheWeek) {
   assert(dayOfTheWeek >= 0 && dayOfTheWeek < 7);
@@ -25,4 +26,4 @@ static QString dayName(int dayOfTheWeek) {
   return detail::dayNames[dayOfTheWeek];
 }
 
-#endif // __ARXCLOCK_UTILITY_H__
+#endif // ARXCLOCK_UTILITY_H
