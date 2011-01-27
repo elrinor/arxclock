@@ -1,3 +1,6 @@
+1.1.8
++ Now using Phonon for audio playback.
+
 1.1.7
 * Fixed a bug with "<" symbol not being properly displayed in alarm messages.
 
