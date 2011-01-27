@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_DAEMON_H__
-#define __ARXCLOCK_DAEMON_H__
+#ifndef ARXCLOCK_DAEMON_H
+#define ARXCLOCK_DAEMON_H
 
 #include "config.h"
 #include <QtGui>
@@ -7,9 +7,7 @@
 #include "RingWidget.h"
 
 class Daemon: public QObject {
-private:
   Q_OBJECT
-
 public:
   Daemon(QSettings* settings);
   ~Daemon();
@@ -28,4 +26,4 @@ private:
 };
 
 
-#endif // __ARXCLOCK_DAEMON_H__
+#endif // ARXCLOCK_DAEMON_H

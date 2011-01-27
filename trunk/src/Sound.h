@@ -1,26 +1,24 @@
-#ifndef __ARXCLOCK_SOUND_H__
-#define __ARXCLOCK_SOUND_H__
+#ifndef ARXCLOCK_SOUND_H
+#define ARXCLOCK_SOUND_H
 
 #include "config.h"
 #include <QObject>
+#include <QScopedPointer>
 #include <QString>
 
 class Sound: public QObject {
   Q_OBJECT;
-
-private:
-  struct SoundImpl;
-  SoundImpl* impl;
-
 public:
-  static void init();
-
   Sound(QString fileName, QObject* parent = NULL);
 
   void play();
   void stop();
 
   ~Sound();
+
+private:
+  struct SoundImpl;
+  QScopedPointer<SoundImpl> mImpl;
 };
 
-#endif // __ARXCLOCK_SOUND_H__
+#endif // ARXCLOCK_SOUND_H

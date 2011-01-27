@@ -95,7 +95,9 @@ nmake release-clean</NMakeCleanCommandLine>
   <ItemGroup>
     <None Include="..\arxclock.pro" />
     <None Include="..\HISTORY" />
-    <None Include="..\res\arxclock.qrc" />
+    <None Include="..\res\arxclock.qrc">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

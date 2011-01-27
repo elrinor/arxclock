@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_ALARM_H__
-#define __ARXCLOCK_ALARM_H__
+#ifndef ARXCLOCK_ALARM_H
+#define ARXCLOCK_ALARM_H
 
 #include "config.h"
 #include <cassert>
@@ -272,4 +272,4 @@ private:
   QDateTime mNextRunTime;
 };
 
-#endif // __ARXCLOCK_ALARM_H__
+#endif // ARXCLOCK_ALARM_H

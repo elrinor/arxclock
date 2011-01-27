@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_ALARM_MANAGER_H__
-#define __ARXCLOCK_ALARM_MANAGER_H__
+#ifndef ARXCLOCK_ALARM_MANAGER_H
+#define ARXCLOCK_ALARM_MANAGER_H
 
 #include "config.h"
 #include <cassert>
@@ -141,4 +141,4 @@ private:
 };
 
 
-#endif // __ARXCLOCK_ALARM_MANAGER_H__
+#endif // ARXCLOCK_ALARM_MANAGER_H

@@ -1,5 +1,5 @@
-#ifndef __ARXCLOCK_SNOOZE_DIALOG_H__
-#define __ARXCLOCK_SNOOZE_DIALOG_H__
+#ifndef ARXCLOCK_SNOOZE_DIALOG_H
+#define ARXCLOCK_SNOOZE_DIALOG_H
 
 #include "config.h"
 #include <QtGui>
@@ -44,4 +44,4 @@ private:
 };
 
 
-#endif // __ARXCLOCK_SNOOZE_DIALOG_H__
+#endif // ARXCLOCK_SNOOZE_DIALOG_H
