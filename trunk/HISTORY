@@ -1,3 +1,6 @@
+1.1.9
+* Now storing settings in an ini file.
+
 1.1.8
 + Now using Phonon for audio playback.
 
