@@ -238,6 +238,9 @@ public:
     }
   }
 
+  static QDateTime never() {
+    return QDateTime(QDate(7999, 12, 31));
+  }
 
 protected:
   bool changed() const {
@@ -251,10 +254,6 @@ protected:
   friend class AlarmManager;
 
 private:
-  static QDateTime never() {
-    return QDateTime(QDate(7999, 12, 31));
-  }
-
   /* Saved state. */
   QString mId;
   Type mType;

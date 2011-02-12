@@ -20,12 +20,13 @@ HEADERS = \
   src/SnoozeDialog.h \
   src/Sound.h \  
 
-FORMS = 
+FORMS = \
+  src/AlarmParamsDialog.ui \
 
 RESOURCES = \
   res/arxclock.qrc \
 
-UI_DIR    = src/ui
+UI_DIR    = bin/temp/ui
 MOC_DIR   = bin/temp/moc
 RCC_DIR   = bin/temp/rcc
 TARGET    = arxclock

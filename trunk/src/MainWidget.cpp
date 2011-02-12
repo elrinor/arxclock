@@ -78,7 +78,13 @@ QList<QStandardItem*> MainWidget::alarmToRow(boost::shared_ptr<Alarm> alarm) {
 }
 
 QString MainWidget::alarmNextRun(boost::shared_ptr<Alarm> alarm) {
-  return alarm->active() ? "<running>" : alarm->nextRunTime().toString("dd.MM.yy") + " at " + alarm->nextRunTime().toString("hh:mm:ss");
+  if(alarm->active()) {
+    return tr("<running>");
+  } else if(alarm->nextRunTime() == Alarm::never()) {
+    return tr("<never>");
+  } else {
+    return tr("%1 at %2").arg(alarm->nextRunTime().toString(tr("dd.MM.yy"))).arg(alarm->nextRunTime().toString(tr("hh:mm:ss")));
+  }
 }
 
 void MainWidget::updateNextRunTimes() {
