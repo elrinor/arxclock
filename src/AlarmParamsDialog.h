@@ -3,9 +3,20 @@
 
 #include "config.h"
 #include <boost/shared_ptr.hpp>
-#include <QtGui>
+#include <boost/array.hpp>
+#include <QScopedPointer>
+#include <QDialog>
 #include "Alarm.h"
-#include "Sound.h"
+
+class QCloseEvent;
+class QSettings;
+class QAbstractButton;
+
+namespace Ui {
+    class AlarmParamsDialog;
+}
+
+class Sound;
 
 // -------------------------------------------------------------------------- //
 // AlarmParamsDialogKeys
@@ -23,48 +34,35 @@ public:
 // -------------------------------------------------------------------------- //
 class AlarmParamsDialog: public QDialog, private AlarmParamsDialogKeys {
   Q_OBJECT;
-
 public:
   AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alarm> alarm, QWidget* parent = NULL);
+
+  ~AlarmParamsDialog();
 
 protected:
   virtual void closeEvent(QCloseEvent *event);
 
-private slots:
-  void typeIndexChanged(int index);
-  void doAccept();
-  void doReject();
-  void openAudioFile();
-  void removeAudioFile();
-  void playStopClick();
-
-private:
-  QAbstractButton* createWeeklyButton(const QString& text);
-
   void savePosition();
 
+protected slots:
+  void on_typeBox_currentIndexChanged(int index);
+  void on_openButton_clicked();
+  void on_removeButton_clicked();
+  void on_playButton_clicked();
+  
+  virtual void accept() OVERRIDE;
+  virtual void reject() OVERRIDE;
+
+private:
+  QScopedPointer<Ui::AlarmParamsDialog> mUi;
+  
   QSettings* mSettings;
-
+  
   boost::shared_ptr<Alarm> mAlarm;
-  
-  QComboBox* mTypeBox;
-  QLineEdit* mNameEdit;
 
-  QLabel* mPreLabel;
-  QLabel* mPostLabel;
-  QDateTimeEdit* mDateTimeEdit;
-  
-  QTextEdit* mMessageEdit;
-  QLabel* mAudioFile;
+  QScopedPointer<Sound> mSound;
 
-  QComboBox* mCommandLineBox;
-
-  QToolButton* mPlayStopButton;
-
-  Sound* mSound;
-
-  QWidget* mWeeklyWidget;
-  QAbstractButton* mWeeklyButtons[7];
+  boost::array<QAbstractButton*, 7> mWeeklyButtons;
 };
 
 

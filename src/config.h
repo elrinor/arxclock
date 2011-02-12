@@ -9,4 +9,10 @@
 #  define PHONON_EXPORT
 #endif
 
+#ifdef _MSC_VER
+#  define OVERRIDE override
+#else
+#  define OVERRIDE
+#endif
+
 #endif // ARXCLOCK_CONFIG_H
