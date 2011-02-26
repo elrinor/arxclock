@@ -9,7 +9,7 @@
 class Sound: public QObject {
   Q_OBJECT;
 public:
-  Sound(QString fileName, QObject* parent = NULL);
+  Sound(QString fileName, QObject *parent = NULL);
 
   void play();
   void stop();

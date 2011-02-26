@@ -4,7 +4,7 @@
 #include "MainWidget.h"
 #include "Alarm.h"
 
-Daemon::Daemon(QSettings* settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
+Daemon::Daemon(QSettings *settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
   assert(settings != NULL);
 
   mTrayIcon = new QSystemTrayIcon(qApp->windowIcon(), this);
@@ -57,7 +57,7 @@ void Daemon::timeout() {
     if(alarm->enabled()) {
       activated = true;
       alarm->setActive(true);
-      RingWidget* ringWidget = new RingWidget(mSettings, alarm, mMainWidget);
+      RingWidget *ringWidget = new RingWidget(mSettings, alarm, mMainWidget);
       ringWidget->setAttribute(Qt::WA_DeleteOnClose);
       ringWidget->show();
     }

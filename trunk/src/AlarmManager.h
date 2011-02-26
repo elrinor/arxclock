@@ -30,7 +30,7 @@ public:
 // -------------------------------------------------------------------------- //
 class AlarmManager: public boost::noncopyable, private AlarmManagerKeys {
 public:
-  AlarmManager(QSettings* settings): mSettings(settings) {
+  AlarmManager(QSettings *settings): mSettings(settings) {
     rollback();
   }
 
@@ -137,7 +137,7 @@ private:
   QHash<QString, boost::shared_ptr<Alarm> > mAlarmsMap;
   QList<boost::shared_ptr<Alarm> > mAlarms;
   bool mStructurallyModified;
-  QSettings* mSettings;
+  QSettings *mSettings;
 };
 
 

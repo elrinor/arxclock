@@ -84,13 +84,12 @@ void RingWidget::snooze60() {
 }
 
 void RingWidget::snoozeDialog() {
-  SnoozeDialog* dlg = new SnoozeDialog(this);
-  if(dlg->exec() == QDialog::Accepted) {
-    QTime snoozeTime = dlg->snoozeTime().time();
+  SnoozeDialog dlg(this);
+  if(dlg.exec() == QDialog::Accepted) {
+    QTime snoozeTime = dlg.snoozeTime().time();
     mSnoozeSecs = snoozeTime.second() + 60 * snoozeTime.minute() + 60 * 60 * snoozeTime.hour();
     close();
   }
-  delete dlg;    
 }
 
 void RingWidget::on_moreButton_clicked() {
