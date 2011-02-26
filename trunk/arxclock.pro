@@ -5,7 +5,7 @@ QT       += phonon
 SOURCES = \
   src/AlarmParamsDialog.cpp \
   src/Daemon.cpp \
-  src/main.cpp \
+  src/arxclock.cpp \
   src/MainWidget.cpp \
   src/RingWidget.cpp \
   src/SnoozeDialog.cpp \
