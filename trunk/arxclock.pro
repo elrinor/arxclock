@@ -8,6 +8,7 @@ SOURCES = \
   src/main.cpp \
   src/MainWidget.cpp \
   src/RingWidget.cpp \
+  src/SnoozeDialog.cpp \
   src/Sound.cpp \
   
 HEADERS = \
@@ -24,6 +25,7 @@ FORMS = \
   src/AlarmParamsDialog.ui \
   src/MainWidget.ui \
   src/RingWidget.ui \
+  src/SnoozeDialog.ui \
 
 RESOURCES = \
   res/arxclock.qrc \

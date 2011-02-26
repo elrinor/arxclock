@@ -89,6 +89,7 @@ nmake release-clean</NMakeCleanCommandLine>
   <ItemGroup>
     <ClCompile Include="..\src\Daemon.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\SnoozeDialog.cpp" />
     <ClCompile Include="..\src\Sound.cpp" />
     <ClCompile Include="..\src\AlarmParamsDialog.cpp" />
     <ClCompile Include="..\src\MainWidget.cpp" />

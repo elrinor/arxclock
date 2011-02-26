@@ -2,46 +2,25 @@
 #define ARXCLOCK_SNOOZE_DIALOG_H
 
 #include "config.h"
-#include <QtGui>
+#include <QDialog>
+#include <QScopedPointer>
+#include <QDateTime>
+
+namespace Ui {
+  class SnoozeDialog;
+}
 
 class SnoozeDialog: public QDialog {
   Q_OBJECT;
-
 public:
-  SnoozeDialog(QWidget* parent = NULL): QDialog(parent) {
-    mDateTimeEdit = new QDateTimeEdit();
-    mDateTimeEdit->setDisplayFormat("hh:mm:ss");
+  SnoozeDialog(QWidget *parent = NULL);
 
-    QLabel* snoozeLabel = new QLabel("Snooze time: ");
-    snoozeLabel->setBuddy(mDateTimeEdit);
+  ~SnoozeDialog();
 
-    QHBoxLayout* snoozeLayout = new QHBoxLayout();
-    snoozeLayout->addWidget(snoozeLabel);
-    snoozeLayout->addWidget(mDateTimeEdit);
-
-    QGroupBox* snoozeBox = new QGroupBox(QString("&Snooze"));
-    snoozeBox->setLayout(snoozeLayout);
-
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok, Qt::Horizontal);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(snoozeBox);
-    layout->addWidget(buttonBox);
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    setLayout(layout);
-    setWindowTitle(QString("Snooze..."));
-  }
-
-  QDateTime snoozeTime() const {
-    return mDateTimeEdit->dateTime();
-  }
+  QDateTime snoozeTime() const;
 
 private:
-  QDateTimeEdit* mDateTimeEdit;
+  QScopedPointer<Ui::SnoozeDialog> mUi;
 };
-
 
 #endif // ARXCLOCK_SNOOZE_DIALOG_H
