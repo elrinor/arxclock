@@ -1,12 +1,13 @@
 #include "Daemon.h"
 #include <cassert>
+#include <QApplication>
 #include "MainWidget.h"
 #include "Alarm.h"
 
 Daemon::Daemon(QSettings* settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
   assert(settings != NULL);
 
-  mTrayIcon = new QSystemTrayIcon(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon(), this);
+  mTrayIcon = new QSystemTrayIcon(qApp->windowIcon(), this);
   mTrayIcon->setToolTip("arxclock");
   mTrayIcon->show();
 

@@ -3,9 +3,18 @@
 
 #include "config.h"
 #include <boost/shared_ptr.hpp>
-#include <QtGui>
+#include <QWidget>
+#include <QScopedPointer>
 #include "Alarm.h"
 #include "MainWidget.h"
+
+class QMenu;
+
+class MainWidget;
+
+namespace Ui {
+  class RingWidget;
+}
 
 // -------------------------------------------------------------------------- //
 // RingWidgetKeys
@@ -24,28 +33,29 @@ class RingWidget: public QWidget, private RingWidgetKeys {
   Q_OBJECT;
 
 public:
-  RingWidget(QSettings* settings, boost::shared_ptr<Alarm> alarm, MainWidget* mainWidget);
+  RingWidget(QSettings *settings, boost::shared_ptr<Alarm> alarm, MainWidget *mainWidget, QWidget *parent = NULL);
 
 protected:
   virtual void closeEvent(QCloseEvent *event);
 
 private slots:
-  void snooze5();
+  void on_snooze5Button_clicked();
   void snooze10();
   void snooze15();
   void snooze30();
   void snooze60();
   void snoozeDialog();
-  void more();
+  void on_moreButton_clicked();
 
 private:
-  QSettings* mSettings;
+  QScopedPointer<Ui::RingWidget> mUi;
+
+  QSettings *mSettings;
   boost::shared_ptr<Alarm> mAlarm;
+  MainWidget *mMainWidget;
 
   int mSnoozeSecs;
-  QMenu* mMoreMenu;
-  QPushButton* mMoreButton;
-  MainWidget* mMainWidget;
+  QMenu *mMoreMenu;
 };
 
 #endif // ARXCLOCK_RING_WIDGET_H

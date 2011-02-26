@@ -23,6 +23,7 @@ HEADERS = \
 FORMS = \
   src/AlarmParamsDialog.ui \
   src/MainWidget.ui \
+  src/RingWidget.ui \
 
 RESOURCES = \
   res/arxclock.qrc \
