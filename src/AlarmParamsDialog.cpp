@@ -6,7 +6,7 @@
 #include "Utility.h"
 #include "Sound.h"
 
-AlarmParamsDialog::AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alarm> alarm, QWidget* parent): 
+AlarmParamsDialog::AlarmParamsDialog(QSettings *settings, boost::shared_ptr<Alarm> alarm, QWidget *parent): 
   QDialog(parent), 
   mUi(new Ui::AlarmParamsDialog()),
   mSettings(settings), 

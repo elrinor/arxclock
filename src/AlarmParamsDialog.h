@@ -35,7 +35,7 @@ public:
 class AlarmParamsDialog: public QDialog, private AlarmParamsDialogKeys {
   Q_OBJECT;
 public:
-  AlarmParamsDialog(QSettings* settings, boost::shared_ptr<Alarm> alarm, QWidget* parent = NULL);
+  AlarmParamsDialog(QSettings *settings, boost::shared_ptr<Alarm> alarm, QWidget *parent = NULL);
 
   ~AlarmParamsDialog();
 
@@ -56,7 +56,7 @@ protected slots:
 private:
   QScopedPointer<Ui::AlarmParamsDialog> mUi;
   
-  QSettings* mSettings;
+  QSettings *mSettings;
   
   boost::shared_ptr<Alarm> mAlarm;
 
