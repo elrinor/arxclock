@@ -75,25 +75,26 @@ nmake release-clean</NMakeCleanCommandLine>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\arxclock\Alarm.h" />
+    <ClInclude Include="..\src\arxclock\AlarmManager.h" />
+    <ClInclude Include="..\src\arxclock\AlarmParamsDialog.h" />
+    <ClInclude Include="..\src\arxclock\config.h" />
+    <ClInclude Include="..\src\arxclock\Daemon.h" />
+    <ClInclude Include="..\src\arxclock\MainWidget.h" />
+    <ClInclude Include="..\src\arxclock\RingWidget.h" />
+    <ClInclude Include="..\src\arxclock\SnoozeDialog.h" />
+    <ClInclude Include="..\src\arxclock\Sound.h" />
+    <ClInclude Include="..\src\arxclock\Utility.h" />
     <ClInclude Include="..\src\config.h" />
-    <ClInclude Include="..\src\Daemon.h" />
-    <ClInclude Include="..\src\Sound.h" />
-    <ClInclude Include="..\src\Utility.h" />
-    <ClInclude Include="..\src\Alarm.h" />
-    <ClInclude Include="..\src\AlarmManager.h" />
-    <ClInclude Include="..\src\AlarmParamsDialog.h" />
-    <ClInclude Include="..\src\MainWidget.h" />
-    <ClInclude Include="..\src\RingWidget.h" />
-    <ClInclude Include="..\src\SnoozeDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\arxclock.cpp" />
-    <ClCompile Include="..\src\Daemon.cpp" />
-    <ClCompile Include="..\src\SnoozeDialog.cpp" />
-    <ClCompile Include="..\src\Sound.cpp" />
-    <ClCompile Include="..\src\AlarmParamsDialog.cpp" />
-    <ClCompile Include="..\src\MainWidget.cpp" />
-    <ClCompile Include="..\src\RingWidget.cpp" />
+    <ClCompile Include="..\src\arxclock\AlarmParamsDialog.cpp" />
+    <ClCompile Include="..\src\arxclock\Daemon.cpp" />
+    <ClCompile Include="..\src\arxclock\MainWidget.cpp" />
+    <ClCompile Include="..\src\arxclock\RingWidget.cpp" />
+    <ClCompile Include="..\src\arxclock\SnoozeDialog.cpp" />
+    <ClCompile Include="..\src\arxclock\Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\arxclock.pro" />

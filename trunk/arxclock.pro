@@ -3,29 +3,29 @@ CONFIG   += qt warn_on
 QT       += phonon
 
 SOURCES = \
-  src/AlarmParamsDialog.cpp \
-  src/Daemon.cpp \
   src/arxclock.cpp \
-  src/MainWidget.cpp \
-  src/RingWidget.cpp \
-  src/SnoozeDialog.cpp \
-  src/Sound.cpp \
+  src/arxclock/AlarmParamsDialog.cpp \
+  src/arxclock/Daemon.cpp \
+  src/arxclock/MainWidget.cpp \
+  src/arxclock/RingWidget.cpp \
+  src/arxclock/SnoozeDialog.cpp \
+  src/arxclock/Sound.cpp \
   
 HEADERS = \
-  src/Alarm.h \
-  src/AlarmParamsDialog.h \
   src/config.h \
-  src/Daemon.h \
-  src/MainWidget.h \
-  src/RingWidget.h \
-  src/SnoozeDialog.h \
-  src/Sound.h \  
+  src/arxclock/Alarm.h \
+  src/arxclock/AlarmParamsDialog.h \
+  src/arxclock/Daemon.h \
+  src/arxclock/MainWidget.h \
+  src/arxclock/RingWidget.h \
+  src/arxclock/SnoozeDialog.h \
+  src/arxclock/Sound.h \  
 
 FORMS = \
-  src/AlarmParamsDialog.ui \
-  src/MainWidget.ui \
-  src/RingWidget.ui \
-  src/SnoozeDialog.ui \
+  src/arxclock/AlarmParamsDialog.ui \
+  src/arxclock/MainWidget.ui \
+  src/arxclock/RingWidget.ui \
+  src/arxclock/SnoozeDialog.ui \
 
 RESOURCES = \
   res/arxclock.qrc \
