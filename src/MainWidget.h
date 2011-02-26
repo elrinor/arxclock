@@ -2,8 +2,18 @@
 #define ARXCLOCK_MAIN_WIDGET_H
 
 #include "config.h"
-#include <QtGui>
-#include "AlarmManager.h"
+#include <QWidget>
+#include <QScopedPointer>
+
+class QSettings;
+class QStandardItemModel;
+class QModelIndex;
+
+namespace Ui {
+  class MainWidget;
+}
+
+class AlarmManager;
 
 // -------------------------------------------------------------------------- //
 // MainWidgetKeys
@@ -22,29 +32,30 @@ class MainWidget: public QWidget, private MainWidgetKeys {
   Q_OBJECT;
 
 public:
-  MainWidget(QSettings* settings, AlarmManager* alarmManager);
+  MainWidget(QSettings *settings, AlarmManager *alarmManager, QWidget *parent = NULL);
+
+  ~MainWidget();
 
   void updateNextRunTimes();
 
 protected:
   virtual void closeEvent(QCloseEvent *event);
-  virtual bool eventFilter(QObject* sender, QEvent* e);
+  virtual bool eventFilter(QObject *sender, QEvent *e);
 
 private slots:
-  void addClicked();
-  void editClicked();
-  void deleteClicked();
-  void clicked(const QModelIndex&);
+  void on_addButton_clicked();
+  void on_editButton_clicked();
+  void on_deleteButton_clicked();
+  void on_treeView_clicked(const QModelIndex &);
 
 private:
-  static QList<QStandardItem*> alarmToRow(boost::shared_ptr<Alarm> alarm);
-  static QString alarmNextRun(boost::shared_ptr<Alarm> alarm);
   void toggleEnabledSelected();
 
-  QSettings* mSettings;
-  QTreeView* mTreeView;
-  QStandardItemModel* mItemModel;
-  AlarmManager* mAlarmManager;
+  QScopedPointer<Ui::MainWidget> mUi;
+
+  QSettings *mSettings;
+  QStandardItemModel *mItemModel;
+  AlarmManager *mAlarmManager;
 };
 
 #endif // ARXCLOCK_MAIN_WIDGET_H

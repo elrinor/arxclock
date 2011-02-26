@@ -2,14 +2,21 @@
 #define ARXCLOCK_DAEMON_H
 
 #include "config.h"
-#include <QtGui>
+#include <QObject>
+#include <QSystemTrayIcon>
 #include "MainWidget.h"
 #include "RingWidget.h"
+#include "AlarmManager.h"
+
+class QSettings;
+class QTimer;
+
+class MainWidget;
 
 class Daemon: public QObject {
   Q_OBJECT
 public:
-  Daemon(QSettings* settings);
+  Daemon(QSettings *settings);
   ~Daemon();
 
 private slots:
@@ -17,10 +24,10 @@ private slots:
   void timeout();
 
 private:
-  QTimer* mTimer;
-  QSettings* mSettings;
-  QSystemTrayIcon* mTrayIcon;
-  MainWidget* mMainWidget;
+  QTimer *mTimer;
+  QSettings *mSettings;
+  QSystemTrayIcon *mTrayIcon;
+  MainWidget *mMainWidget;
 
   AlarmManager mAlarmManager;
 };
