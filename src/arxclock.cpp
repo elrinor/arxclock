@@ -2,7 +2,7 @@
 #include <boost/preprocessor/cat.hpp>
 #include <QApplication>
 #include <QSettings>
-#include "Daemon.h"
+#include "arxclock/Daemon.h"
 
 #ifdef ARXCLOCK_STATIC_PLUGINS
 #  include <QtPlugin>
@@ -27,6 +27,6 @@ int main(int argc, char *argv[]) {
 #endif
 
   QSettings settings("arxclock.ini", QSettings::IniFormat);
-  Daemon daemon(&settings);
+  arxclock::Daemon daemon(&settings);
   return app.exec();
 }

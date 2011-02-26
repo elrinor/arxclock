@@ -4,69 +4,72 @@
     <Filter Include="src">
       <UniqueIdentifier>{52fd4c90-8114-4514-a1a2-70b45de4c176}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\entities">
-      <UniqueIdentifier>{32caaa50-e063-4ca8-b27b-4807867b69be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="res">
       <UniqueIdentifier>{34afaa60-ada2-4e18-a805-74c48c6fc7c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\gui">
-      <UniqueIdentifier>{e4e71253-d3a7-4c57-ad00-9c24b82d142b}</UniqueIdentifier>
+    <Filter Include="src\arxclock">
+      <UniqueIdentifier>{1b6b9efc-76f5-4a81-83ac-eff9262eb05a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\arxclock\gui">
+      <UniqueIdentifier>{e2e1a682-dbea-45d7-8a19-a56ea78f710a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Daemon.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\src\arxclock\Alarm.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Sound.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\src\arxclock\AlarmManager.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Utility.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\src\arxclock\config.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Alarm.h">
-      <Filter>src\entities</Filter>
+    <ClInclude Include="..\src\arxclock\Daemon.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AlarmManager.h">
-      <Filter>src\entities</Filter>
+    <ClInclude Include="..\src\arxclock\Sound.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AlarmParamsDialog.h">
-      <Filter>src\gui</Filter>
+    <ClInclude Include="..\src\arxclock\Utility.h">
+      <Filter>src\arxclock</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\MainWidget.h">
-      <Filter>src\gui</Filter>
+    <ClInclude Include="..\src\arxclock\AlarmParamsDialog.h">
+      <Filter>src\arxclock\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\RingWidget.h">
-      <Filter>src\gui</Filter>
+    <ClInclude Include="..\src\arxclock\MainWidget.h">
+      <Filter>src\arxclock\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\SnoozeDialog.h">
-      <Filter>src\gui</Filter>
+    <ClInclude Include="..\src\arxclock\RingWidget.h">
+      <Filter>src\arxclock\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\arxclock\SnoozeDialog.h">
+      <Filter>src\arxclock\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Daemon.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Sound.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AlarmParamsDialog.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\MainWidget.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\RingWidget.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\SnoozeDialog.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\arxclock.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\Daemon.cpp">
+      <Filter>src\arxclock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\Sound.cpp">
+      <Filter>src\arxclock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\AlarmParamsDialog.cpp">
+      <Filter>src\arxclock\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\MainWidget.cpp">
+      <Filter>src\arxclock\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\RingWidget.cpp">
+      <Filter>src\arxclock\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\arxclock\SnoozeDialog.cpp">
+      <Filter>src\arxclock\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
