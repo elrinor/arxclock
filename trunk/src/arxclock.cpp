@@ -15,6 +15,7 @@
 Q_IMPORT_PLUGIN(phonon_ds9)
 #  endif
 #  include <phonon/private/factory_p.h>
+#  include <phonon/phononnamespace.h>
 #endif
 
 int main(int argc, char *argv[]) {
@@ -24,6 +25,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef ARXCLOCK_STATIC_PLUGINS
   Phonon::Factory::setBackend(BOOST_PP_CAT(qt_plugin_instance_, PHONON_BACKEND)());
+  qRegisterMetaType<Phonon::State>();
 #endif
 
   QSettings settings("arxclock.ini", QSettings::IniFormat);

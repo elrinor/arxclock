@@ -2,6 +2,7 @@
 #include <cassert>
 #include <QDesktopWidget>
 #include <QFileDialog>
+#include <QSettings>
 #include "ui_AlarmParamsDialog.h"
 #include "Utility.h"
 #include "Sound.h"

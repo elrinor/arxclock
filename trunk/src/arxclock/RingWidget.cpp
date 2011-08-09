@@ -1,9 +1,10 @@
 #include "RingWidget.h"
+#include <cstdlib> /* for system(). */
 #include <QApplication>
 #include <QCloseEvent>
 #include <QDesktopWidget>
 #include <QMenu>
-#include <cstdlib> /* for system(). */
+#include <QSettings>
 #include "Alarm.h"
 #include "Sound.h"
 #include "SnoozeDialog.h"

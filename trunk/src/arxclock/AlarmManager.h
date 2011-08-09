@@ -6,6 +6,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <QHash>
+#include <QSettings>
 #include "Alarm.h"
 
 namespace arxclock {
