@@ -1,7 +1,7 @@
 #ifndef ARXCLOCK_CONFIG_H
 #define ARXCLOCK_CONFIG_H
 
-#define ARXCLOCK_VERSION "1.1.9"
+#define ARXCLOCK_VERSION "1.1.10"
 
 /* Phonon doesn't support static compilation, but it can be hacked.
  * This is one of the hacks. */

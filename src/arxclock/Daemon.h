@@ -32,6 +32,7 @@ namespace arxclock {
     QSettings *mSettings;
     QSystemTrayIcon *mTrayIcon;
     MainWidget *mMainWidget;
+    QMenu *mTrayMenu;
 
     AlarmManager mAlarmManager;
   };

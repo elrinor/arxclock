@@ -5,8 +5,10 @@
 #include <cassert>
 #include <boost/noncopyable.hpp>
 #include <boost/array.hpp>
-#include <QtCore>
+#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
+#include <QString>
 #include <QStandardItem>
+#include <QDateTime>
 #include "Utility.h"
 
 namespace arxclock {
@@ -14,6 +16,7 @@ namespace arxclock {
 // Alarm
 // -------------------------------------------------------------------------- //
   class Alarm: public boost::noncopyable {
+    Q_DECLARE_TR_FUNCTIONS(Alarm)
   public:
     enum Type {
       ALARM_COUNTDOWN = 0,
@@ -125,14 +128,14 @@ namespace arxclock {
 
     static QString typeToString(Type type) {
       switch(type) {
-      case ALARM_COUNTDOWN: return "Countdown";
-      case ALARM_ONCE:      return "Once";
-      case ALARM_MINUTELY:  return "Minutely";
-      case ALARM_HOURLY:    return "Hourly";
-      case ALARM_DAYLY:     return "Daily";
-      case ALARM_WEEKLY:    return "Weekly";
-      case ALARM_MONTHLY:   return "Monthly";
-      case ALARM_ANNUALLY:  return "Annually";
+      case ALARM_COUNTDOWN: return tr("Countdown");
+      case ALARM_ONCE:      return tr("Once");
+      case ALARM_MINUTELY:  return tr("Minutely");
+      case ALARM_HOURLY:    return tr("Hourly");
+      case ALARM_DAYLY:     return tr("Daily");
+      case ALARM_WEEKLY:    return tr("Weekly");
+      case ALARM_MONTHLY:   return tr("Monthly");
+      case ALARM_ANNUALLY:  return tr("Annually");
       default:              Unreachable();
       }
     }
@@ -144,29 +147,29 @@ namespace arxclock {
     QString toString() const {
       QString s = typeString();
       switch (mType) {
-      case ALARM_ONCE:      return s + " on " + mTime.toString("dd.MM.yy") + " at " + mTime.toString("hh:mm:ss");
-      case ALARM_MINUTELY:  return s + " at " + mTime.toString("ss") + " seconds";
-      case ALARM_HOURLY:    return s + " at " + mTime.toString("mm:ss");
-      case ALARM_DAYLY:     return s + " at " + mTime.toString("hh:mm:ss");
-      case ALARM_WEEKLY:    
-        s += " on ";
+      case ALARM_ONCE:      return tr("%1 on %2 at %3").arg(s).arg(mTime.toString(tr("dd.MM.yy"))).arg(mTime.toString(tr("hh:mm:ss", "ALARM_ONCE")));
+      case ALARM_MINUTELY:  return tr("%1 at %2 seconds").arg(s).arg(mTime.toString(tr("ss")));
+      case ALARM_HOURLY:    return tr("%1 at %2", "ALARM_HOURLY").arg(s).arg(mTime.toString(tr("mm:ss")));
+      case ALARM_DAYLY:     return tr("%1 at %2", "ALARM_DAYLY").arg(s).arg(mTime.toString(tr("hh:mm:ss", "ALARM_DAYLY")));
+      case ALARM_WEEKLY: { 
+        QString dayList;
         if(mNextRunTime == never()) {
-          s += "<never>";
+          dayList = tr("<never>");
         } else {
           bool comma = false;
           for(int i = 0; i < 7; i++) {
             if(mWeekMask[i]) {
               if(comma)
-                s += ", ";
-              s += dayName(i);
+                dayList += ", ";
+              dayList += dayName(i);
               comma = true;
             }
           }
         }
-        s += " at " + mTime.toString("hh:mm:ss");
-        return s;
-      case ALARM_MONTHLY:   return s + " on " + mTime.toString("dd") + " day of the month at " + mTime.toString("hh:mm:ss");
-      case ALARM_ANNUALLY:  return s + " on " + mTime.toString("dd.MM") + " at " + mTime.toString("hh:mm:ss");
+        return tr("%1 on %2 at %3").arg(s).arg(dayList).arg(mTime.toString(tr("hh:mm:ss", "ALARM_WEEKLY")));
+      }
+      case ALARM_MONTHLY:   return tr("%1 on %2 day of the month at %3").arg(s).arg(mTime.toString(tr("dd"))).arg(mTime.toString(tr("hh:mm:ss", "ALARM_MONTHLY")));
+      case ALARM_ANNUALLY:  return tr("%1 on %2 at %3").arg(s).arg(mTime.toString(tr("dd.MM"))).arg(mTime.toString(tr("hh:mm:ss", "ALARM_ANNUALLY")));
       default:              Unreachable();
       }
     }
@@ -240,7 +243,7 @@ namespace arxclock {
     }
 
     static QDateTime never() {
-      return QDateTime(QDate(7999, 12, 31));
+      return QDateTime(QDate(2999, 12, 31));
     }
 
   protected:

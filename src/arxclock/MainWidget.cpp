@@ -58,10 +58,10 @@ namespace arxclock {
     mUi->treeView->installEventFilter(this);
 
     mItemModel = new QStandardItemModel(0, 4, this);
-    mItemModel->setHeaderData(0, Qt::Horizontal, "On");
-    mItemModel->setHeaderData(1, Qt::Horizontal, "Name");
-    mItemModel->setHeaderData(2, Qt::Horizontal, "Type");
-    mItemModel->setHeaderData(3, Qt::Horizontal, "Next Run");
+    mItemModel->setHeaderData(0, Qt::Horizontal, tr("On"));
+    mItemModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
+    mItemModel->setHeaderData(2, Qt::Horizontal, tr("Type"));
+    mItemModel->setHeaderData(3, Qt::Horizontal, tr("Next Run"));
 
     foreach(boost::shared_ptr<Alarm> alarm, mAlarmManager->alarms())
       mItemModel->appendRow(alarmToRow(alarm));

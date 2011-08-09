@@ -1,16 +1,23 @@
 #include "Daemon.h"
 #include <cassert>
 #include <QApplication>
+#include <QMenu>
+#include <QTimer>
 #include "MainWidget.h"
 #include "Alarm.h"
 
 namespace arxclock {
 
-  Daemon::Daemon(QSettings *settings): mSettings(settings), mAlarmManager(settings), mMainWidget(NULL) {
+  Daemon::Daemon(QSettings *settings): 
+    mSettings(settings), 
+    mAlarmManager(settings), 
+    mMainWidget(NULL),
+    mTrayMenu(NULL)
+  {
     assert(settings != NULL);
 
     mTrayIcon = new QSystemTrayIcon(qApp->windowIcon(), this);
-    mTrayIcon->setToolTip("arxclock");
+    mTrayIcon->setToolTip(tr("arxclock"));
     mTrayIcon->show();
 
     mTimer = new QTimer(this);
@@ -21,6 +28,13 @@ namespace arxclock {
 
     connect(mTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
       this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+
+    mTrayMenu = new QMenu(mMainWidget);
+    QAction *closeAction = new QAction(tr("&Quit"), this);
+    connect(closeAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    mTrayMenu->addAction(closeAction);
+
+    mTrayIcon->setContextMenu(mTrayMenu);
   }
 
   Daemon::~Daemon() {
